@@ -1,39 +1,58 @@
 package griezma.mssc.beerservice.web.controller;
 
+import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.beerservice.web.model.BeerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.ServletContext;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/beer")
 public class BeerController {
+    private static final String API_V1 = "/api/v1/beer";
+
+    private final BeerService beerService;
+    private final ServletContext context;
+
+
     @GetMapping("{beerId}")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
-
-        //todo impl
-        return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
+        return beerService.findBeerById(beerId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity saveNewBeer(@RequestBody BeerDto beerDto){
-
-        //todo impl
-        return new ResponseEntity(HttpStatus.CREATED);
+    public ResponseEntity saveNewBeer(@RequestBody @Valid BeerDto beerDto){
+        BeerDto saved = beerService.saveBeer(beerDto);
+        URI location = makeURI(saved.getId().toString());
+        return ResponseEntity.created(location).build();
     }
 
     @PutMapping("/{beerId}")
-    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto){
-
-        //todo impl
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody @Valid BeerDto beerDto) {
+        beerService.updateBeer(beerId, beerDto);
     }
 
     @DeleteMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("beerId") UUID beerId) {
-        //todo impl
+        beerService.removeBeerById(beerId);
+    }
+
+    private URI makeURI(String part) {
+        return ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .build(API_V1, part);
     }
 }
