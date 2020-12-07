@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring", uses = DateTimeMapper.class)
 public interface BeerMapper {
-    BeerDto asBeerDto(Beer beer);
-    Beer toBeer(BeerDto beerDto);
+    BeerDto beerToDto(Beer beer);
+    Beer dtoToBeer(BeerDto beerDto);
 }

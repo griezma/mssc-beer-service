@@ -8,13 +8,13 @@ import java.time.ZoneOffset;
 
 @Component
 public class DateTimeMapper {
-    public Timestamp toTimestamp(OffsetDateTime dt) {
+    public Timestamp asTimestamp(OffsetDateTime dt) {
         if (dt == null) return null;
         return Timestamp.valueOf(dt.atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
     }
 
-    public OffsetDateTime toDateTime(Timestamp ts) {
+    public OffsetDateTime asOffsetDateTime(Timestamp ts) {
         if (ts == null) return null;
-        return OffsetDateTime.ofInstant(ts.toInstant(), ZoneOffset.UTC);
+        return OffsetDateTime.of(ts.toLocalDateTime(), ZoneOffset.UTC);
     }
 }

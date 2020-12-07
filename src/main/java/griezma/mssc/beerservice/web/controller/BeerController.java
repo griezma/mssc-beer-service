@@ -2,14 +2,17 @@ package griezma.mssc.beerservice.web.controller;
 
 import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.beerservice.web.model.BeerDto;
+import griezma.mssc.beerservice.web.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.ServletContext;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.UUID;
@@ -23,9 +26,16 @@ public class BeerController {
     private final BeerService beerService;
     private final ServletContext context;
 
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    Page<BeerDto> listBeers(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
+                                   @RequestParam(value = "pageSize", required = false, defaultValue = "25") Integer pageSize,
+                                   @RequestParam(value = "name", required = false) String beerName,
+                                   @RequestParam(value = "style", required = false) String beerStyle) {
+        return beerService.findBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize));
+    }
 
     @GetMapping("{beerId}")
-    public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
+    ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
         return beerService.findBeerById(beerId)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

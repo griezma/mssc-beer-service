@@ -1,0 +1,5 @@
+-- noinspection SqlNoDataSourceInspectionForFile
+
+INSERT INTO beer (id, beer_name, beer_style, created, last_modified, quantity_to_brew, price, upc, version ) values ('0a818933087d47f2ad832f986ed087eb', 'Mango Bobs', 'IPA', CURRENT_TIMESTAMP , CURRENT_TIMESTAMP , 200, 12.95, '0631234200036', 1);
+INSERT INTO beer (id, beer_name, beer_style, created, last_modified, quantity_to_brew, price, upc, version ) values ('a712d91461ea46238bd032c0f6545bfd', 'Galaxy Cat', 'PALE_ALE', CURRENT_TIMESTAMP , CURRENT_TIMESTAMP , 200, 12.95, '0631234300019', 1);
+INSERT INTO beer (id, beer_name, beer_style, created, last_modified, quantity_to_brew, price, upc, version ) values ('026cc3c83a0c4083a05be908048c1b08', 'Pinball Porter', 'PORTER', CURRENT_TIMESTAMP , CURRENT_TIMESTAMP , 200, 12.95, '0083783375213', 1);

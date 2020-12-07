@@ -1,10 +1,12 @@
 package griezma.mssc.beerservice.data;
 
-import lombok.*;
-import griezma.mssc.beerservice.web.model.BeerStyle;
-import org.hibernate.annotations.CollectionId;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -13,12 +15,13 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @Type(type = "org.hibernate.type.UUIDBinaryType")
+    @Column(columnDefinition = "binary(16)", updatable = false, nullable = false)
     private UUID id;
 
     @Version
@@ -28,7 +31,7 @@ public class Beer {
     private Timestamp created;
 
     @UpdateTimestamp
-    private Timestamp updated;
+    private Timestamp lastModified;
 
     @Column(nullable = false)
     private String beerName;
@@ -37,7 +40,7 @@ public class Beer {
     private String beerStyle;
 
     @Column(unique = true)
-    private Long upc;
+    private String upc;
 
     private BigDecimal price;
 
