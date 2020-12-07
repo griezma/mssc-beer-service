@@ -9,6 +9,6 @@ workflows:
   maven_test:
     jobs:
       - maven/test:
-        command: '-X verify'
+          command: '-X verify'
 executors:
-  tag: 11.0
+  tag: '11.0'
