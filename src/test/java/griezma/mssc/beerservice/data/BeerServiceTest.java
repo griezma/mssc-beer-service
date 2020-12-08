@@ -27,13 +27,13 @@ public class BeerServiceTest {
 
     @Test
     void canQueryByName() {
-        Page<BeerDto> result = beerService.findBeers("mango", null, false, PageRequest.of(0, 5));
+        Page<BeerDto> result = beerService.listBeers("mango", null, false, PageRequest.of(0, 5));
         assertThat(result.getTotalElements()).isGreaterThan(0);
     }
 
     @Test
     void canQueryByStyle() {
-        Page<BeerDto> result = beerService.findBeers(null, "IPA", false, PageRequest.of(0, 5));
+        Page<BeerDto> result = beerService.listBeers(null, "IPA", false, PageRequest.of(0, 5));
         assertThat(result.getTotalElements()).isGreaterThan(0);
     }
 }

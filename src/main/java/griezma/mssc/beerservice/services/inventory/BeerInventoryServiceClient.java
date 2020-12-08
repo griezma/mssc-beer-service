@@ -17,8 +17,9 @@ public class BeerInventoryServiceClient implements BeerInventoryService {
     private static final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
 
+    // NOTE: must not be final
     @Value("${brewery.inventoryServiceHost}")
-    private final String inventoryServiceHost = "http://localhost:8080";
+    private String inventoryServiceHost = "http://localhost:8080";
 
     public BeerInventoryServiceClient(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();

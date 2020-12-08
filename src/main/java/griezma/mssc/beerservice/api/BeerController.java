@@ -31,7 +31,7 @@ public class BeerController {
                             @RequestParam(value = "name", required = false) String beerName,
                             @RequestParam(value = "style", required = false) String beerStyle,
                             @RequestParam(value = "inventory", required = false, defaultValue = "false") boolean inventory) {
-        return beerService.findBeers(beerName, beerStyle, inventory, PageRequest.of(pageNumber, pageSize));
+        return beerService.listBeers(beerName, beerStyle, inventory, PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("{beerId}")

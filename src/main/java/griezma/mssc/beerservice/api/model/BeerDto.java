@@ -1,18 +1,20 @@
 package griezma.mssc.beerservice.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data @Builder @AllArgsConstructor
-public class BeerDto {
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class BeerDto implements Serializable {
     @Null
     private UUID id;
     @NotBlank
