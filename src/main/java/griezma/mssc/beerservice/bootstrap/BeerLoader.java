@@ -2,7 +2,7 @@ package griezma.mssc.beerservice.bootstrap;
 
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.web.model.BeerStyle;
+import griezma.mssc.beerservice.api.model.BeerStyle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

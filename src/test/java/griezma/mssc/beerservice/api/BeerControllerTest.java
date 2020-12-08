@@ -1,31 +1,27 @@
-package griezma.mssc.beerservice.web.controller;
+package griezma.mssc.beerservice.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import griezma.mssc.beerservice.api.BeerController;
 import griezma.mssc.beerservice.services.BeerService;
-import griezma.mssc.beerservice.web.model.BeerDto;
-import griezma.mssc.beerservice.web.model.BeerStyle;
+import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.beerservice.api.model.BeerStyle;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.contains;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.web.servlet.function.RequestPredicates.contentType;
 
 @WebMvcTest(BeerController.class)
 public class BeerControllerTest {

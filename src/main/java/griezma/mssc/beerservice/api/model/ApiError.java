@@ -1,4 +1,4 @@
-package griezma.mssc.beerservice.web.model;
+package griezma.mssc.beerservice.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,6 @@ public class ApiError {
     private String status = HttpStatus.BAD_REQUEST.toString();
     private String reason;
 
-    @JsonFormat(timezone = "UTC", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(timezone = "UTC", pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", shape = JsonFormat.Shape.STRING)
     private final OffsetDateTime timestamp = OffsetDateTime.now();
 }

@@ -1,6 +1,5 @@
 package griezma.mssc.beerservice.data;
 
-import griezma.mssc.beerservice.web.model.BeerStyle;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

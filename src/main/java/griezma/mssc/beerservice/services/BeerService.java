@@ -2,8 +2,8 @@ package griezma.mssc.beerservice.services;
 
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.data.mapper.BeerMapper;
-import griezma.mssc.beerservice.web.model.BeerDto;
+import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.beerservice.api.mapper.BeerMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

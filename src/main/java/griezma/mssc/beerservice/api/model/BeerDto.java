@@ -1,4 +1,4 @@
-package griezma.mssc.beerservice.web.model;
+package griezma.mssc.beerservice.api.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -28,6 +28,6 @@ public class BeerDto {
     private String upc;
     @Positive @Max(200)
     private BigDecimal price;
-    @Positive @Max(2000)
+    @Positive
     private Integer quantityOnHand;
 }

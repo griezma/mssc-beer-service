@@ -1,4 +1,4 @@
-package griezma.mssc.beerservice.data.mapper;
+package griezma.mssc.beerservice.api.mapper;
 
 import org.springframework.stereotype.Component;
 
