@@ -14,11 +14,11 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class BeerInventoryServiceClient implements BeerInventoryService {
-    private final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
+    private static final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
 
     @Value("${brewery.inventoryServiceHost}")
-    private String inventoryServiceHost = "http://localhost:8080";
+    private final String inventoryServiceHost = "http://localhost:8080";
 
     public BeerInventoryServiceClient(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();

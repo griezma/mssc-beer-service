@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
 
 @RequiredArgsConstructor
 @Service
@@ -18,9 +19,9 @@ public class BeerService {
     private final BeerRepository repo;
     private final BeerMapper mapper;
 
-    public Optional<BeerDto> findBeerById(UUID beerId) {
+    public Optional<BeerDto> findBeerById(UUID beerId, boolean includeInventory) {
         return repo.findById(beerId)
-                .map(mapper::beerToDto);
+                .map(dtoMapping(includeInventory));
     }
 
     public BeerDto saveBeer(BeerDto beerDto) {
@@ -40,14 +41,18 @@ public class BeerService {
         repo.save(changed);
     }
 
-    public Page<BeerDto> findBeers(String beerName, String beerStyle, PageRequest of) {
+    public Page<BeerDto> findBeers(String beerName, String beerStyle, boolean inventory, PageRequest of) {
         if (beerName != null) {
-            return repo.findAllByBeerNameContainingIgnoreCase(beerName, of).map(mapper::beerToDto);
+            return repo.findAllByBeerNameContainingIgnoreCase(beerName, of).map(dtoMapping(inventory));
         } else if (beerStyle != null) {
-            return repo.findAllByBeerStyleContainingIgnoreCase(beerStyle, of).map(mapper::beerToDto);
+            return repo.findAllByBeerStyleContainingIgnoreCase(beerStyle, of).map(dtoMapping(inventory));
         } else {
             return repo.findAll(of).map(mapper::beerToDto);
         }
 
+    }
+
+    private Function<Beer, BeerDto> dtoMapping(Boolean includeInventory) {
+        return includeInventory ? mapper::beerToDtoWithInventory : mapper::beerToDto;
     }
 }

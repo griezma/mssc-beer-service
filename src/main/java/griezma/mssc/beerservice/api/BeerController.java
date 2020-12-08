@@ -27,15 +27,16 @@ public class BeerController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     Page<BeerDto> listBeers(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
-                                   @RequestParam(value = "pageSize", required = false, defaultValue = "25") Integer pageSize,
-                                   @RequestParam(value = "name", required = false) String beerName,
-                                   @RequestParam(value = "style", required = false) String beerStyle) {
-        return beerService.findBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize));
+                            @RequestParam(value = "pageSize", required = false, defaultValue = "25") Integer pageSize,
+                            @RequestParam(value = "name", required = false) String beerName,
+                            @RequestParam(value = "style", required = false) String beerStyle,
+                            @RequestParam(value = "inventory", required = false, defaultValue = "false") boolean inventory) {
+        return beerService.findBeers(beerName, beerStyle, inventory, PageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("{beerId}")
-    ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId){
-        return beerService.findBeerById(beerId)
+    ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId, @RequestParam(value = "inventory", required = false, defaultValue = "false") Boolean includeInventory){
+        return beerService.findBeerById(beerId, includeInventory)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

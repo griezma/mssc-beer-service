@@ -43,7 +43,7 @@ public class BeerMapperTest {
     @Test
     void beerDtoContainsInventoryData() {
         Beer validBeer = validBeer();
-        BeerDto dto = mapper.beerToDto(validBeer);
+        BeerDto dto = mapper.beerToDtoWithInventory(validBeer);
         assertEquals(42, dto.getQuantityOnHand());
     }
 

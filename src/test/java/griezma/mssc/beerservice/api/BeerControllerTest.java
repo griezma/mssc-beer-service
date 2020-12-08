@@ -1,10 +1,9 @@
 package griezma.mssc.beerservice.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import griezma.mssc.beerservice.api.BeerController;
-import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.beerservice.api.model.BeerDto;
 import griezma.mssc.beerservice.api.model.BeerStyle;
+import griezma.mssc.beerservice.services.BeerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -36,19 +35,20 @@ public class BeerControllerTest {
 
     @Test
     void getsExistingBeerById() throws Exception {
-        Mockito.when(mockBeerService.findBeerById(any(UUID.class)))
+        Mockito.when(mockBeerService.findBeerById(any(UUID.class), anyBoolean()))
                 .thenAnswer(invocation -> Optional.of(validBeer(invocation.getArgument(0))));
-        mvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()))
+        mvc.perform(get("/api/v1/beer/" + UUID.randomUUID()))
+//                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
     }
 
     @Test
-    void getReturnsNotFoundIfBeerNotExists() throws Exception {
-        Mockito.when(mockBeerService.findBeerById(any(UUID.class)))
+    void returnsNotFoundIfBeerNotExists() throws Exception {
+        Mockito.when(mockBeerService.findBeerById(any(UUID.class), anyBoolean()))
                 .thenReturn(Optional.empty());
 
-        mvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()))
+        mvc.perform(get("/api/v1/beer/" + UUID.randomUUID()))
                 .andExpect(status().isNotFound());
     }
 
@@ -94,7 +94,7 @@ public class BeerControllerTest {
         changedBeer.setBeerName("other beer");
         UUID fakeId = UUID.randomUUID();
 
-        Mockito.when(mockBeerService.findBeerById(fakeId))
+        Mockito.when(mockBeerService.findBeerById(fakeId, false))
                 .thenReturn(Optional.of(validBeer));
 
         mvc.perform(put("/api/v1/beer/" + UUID.randomUUID())
