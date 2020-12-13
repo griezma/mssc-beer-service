@@ -26,7 +26,7 @@ public class BeerService {
     public Optional<BeerDto> findBeerById(UUID beerId, boolean inventory) {
         log.debug("caching? findBeerById was called");
         return repo.findById(beerId)
-                .map(dtoMapping(inventory));
+                .map(beerToDto(inventory));
     }
 
     public BeerDto saveBeer(BeerDto beerDto) {
@@ -46,20 +46,24 @@ public class BeerService {
         repo.save(changed);
     }
 
+    public Optional<BeerDto> findBeerByUpc(String upc) {
+        return repo.findByUpc(upc).map(mapper::beerToDto);
+    }
+
     @Cacheable(cacheNames = "beerListCache", condition = "#inventory == false")
     public Page<BeerDto> listBeers(String beerName, String beerStyle, boolean inventory, PageRequest of) {
         log.debug("caching? listBeers was called");
         if (beerName != null) {
-            return repo.findAllByBeerNameContainingIgnoreCase(beerName, of).map(dtoMapping(inventory));
+            return repo.findAllByBeerNameContainingIgnoreCase(beerName, of).map(beerToDto(inventory));
         } else if (beerStyle != null) {
-            return repo.findAllByBeerStyleContainingIgnoreCase(beerStyle, of).map(dtoMapping(inventory));
+            return repo.findAllByBeerStyleContainingIgnoreCase(beerStyle, of).map(beerToDto(inventory));
         } else {
-            return repo.findAll(of).map(dtoMapping(inventory));
+            return repo.findAll(of).map(beerToDto(inventory));
         }
 
     }
 
-    private Function<Beer, BeerDto> dtoMapping(boolean includeInventory) {
+    private Function<Beer, BeerDto> beerToDto(boolean includeInventory) {
         return includeInventory ? mapper::beerToDtoWithInventory : mapper::beerToDto;
     }
 }

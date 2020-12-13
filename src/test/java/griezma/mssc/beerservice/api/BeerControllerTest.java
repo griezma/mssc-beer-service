@@ -5,6 +5,7 @@ import griezma.mssc.beerservice.api.model.BeerDto;
 import griezma.mssc.beerservice.api.model.BeerStyle;
 import griezma.mssc.beerservice.services.BeerService;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedConstruction;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -16,8 +17,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyBoolean;
+import static org.mockito.ArgumentMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -103,6 +103,33 @@ public class BeerControllerTest {
                 .andExpect(status().isNoContent())
                 .andDo(print());
 
+    }
+
+    @Test
+    void canGetBeerByUpc() throws Exception {
+        String upc = "0123123123";
+        BeerDto beer = validBeer(UUID.randomUUID());
+        beer.setUpc(upc);
+        var optBeer = Optional.of(beer);
+
+        Mockito.when(mockBeerService.findBeerByUpc(upc))
+                .thenReturn(optBeer);
+
+        mvc.perform(get("/api/v1/beerupc/" + upc))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+
+    }
+
+    @Test
+    void returnsNotFoundWhenBeerByUpcNotExists() throws Exception {
+
+        Mockito.when(mockBeerService.findBeerByUpc(anyString()))
+                .thenReturn(Optional.empty());
+
+        mvc.perform(get("/api/v1/beerupc/" + "0123123123"))
+                .andExpect(status().isNotFound())
+                .andDo(print());
     }
 
     static BeerDto validBeer(UUID id) {
