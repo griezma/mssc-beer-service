@@ -16,5 +16,4 @@ class BeerServiceApplicationTests {
     void contextLoads() {
         assertNotNull(repo);
     }
-
 }
