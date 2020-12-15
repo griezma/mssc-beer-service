@@ -7,6 +7,7 @@ workflows:
   maven_test:
     jobs:
       - maven/test:
+          context: Github
           settings_file: '.circleci/settings.xml'
 
 executors:
