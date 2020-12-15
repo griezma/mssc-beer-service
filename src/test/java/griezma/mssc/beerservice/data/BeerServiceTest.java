@@ -17,14 +17,6 @@ public class BeerServiceTest {
     @Autowired
     BeerService beerService;
 
-    final UUID existingBeerId = UUID.fromString("a712d914-61ea-4623-8bd0-32c0f6545bfd");
-
-    @Test
-    void canFindBeerById() {
-        var result = beerService.findBeerById(existingBeerId, false);
-        assertThat(result).isNotEmpty();
-    }
-
     @Test
     void canQueryByName() {
         Page<BeerDto> result = beerService.listBeers("mango", null, false, PageRequest.of(0, 5));
