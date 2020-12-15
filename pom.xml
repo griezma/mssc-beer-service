@@ -14,4 +14,12 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <description>MSSC Beer Service</description>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <name>GitHub Beerworks</name>
+            <url>https://maven.pkg.github.com/griezma/mssc-beerworks</url>
+        </repository>
+    </repositories>
 </project>
