@@ -10,7 +10,7 @@
             <repositories>
                 <repository>
                     <id>github</id>
-                    <name>GitHub Beerworks </name>
+                    <name>GitHub Beerworks</name>
                     <url>https://maven.pkg.github.com/griezma/mssc-beerworks</url>
                     <snapshots><enabled>true</enabled></snapshots>
                 </repository>
