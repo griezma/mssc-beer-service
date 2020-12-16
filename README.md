@@ -1,11 +1,12 @@
 # Beer Service
 
+[![maven-build](https://github.com/griezma/mssc-beer-service/workflows/maven-build/badge.svg)](https://github.com/griezma/mssc-beer-service/actions)
+
 [![mssc-beer-service](https://circleci.com/gh/griezma/mssc-beer-service.svg?style=svg)](https://circleci.com/gh/griezma/mssc-beer-service)
-![maven-build](https://github.com/griezma/mssc-beer-service/workflows/maven-build/badge.svg)
 
 Spring Boot microservice test
 
-*Reminder: Activate Spring Profile*
+#### Reminder - How to Activate Spring Profile
 <dl>
     <dt>Maven</dt>
     <dd>mvn spring-boot:run -Dspring-boot.run.profiles=localmysql</dd>
