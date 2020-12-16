@@ -22,7 +22,7 @@
         <server>
             <id>github</id>
             <username>griezma</username>
-            <password>${env.GH_PAT}</password>
+            <password>${env.read_packages}</password>
         </server>
     </servers>
 </settings>
