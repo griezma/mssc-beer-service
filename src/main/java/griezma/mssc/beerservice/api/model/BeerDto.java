@@ -15,6 +15,8 @@ import java.util.UUID;
 @Data @Builder @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BeerDto implements Serializable {
+    static final long serialVersionUID = 7220034028643401220L;
+
     @Null
     private UUID id;
     @NotBlank

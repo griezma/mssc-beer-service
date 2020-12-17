@@ -14,4 +14,11 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <description>MSSC Beer Service</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>artemis-jms-server</artifactId>
+        </dependency>
+    </dependencies>
 </project>

@@ -18,7 +18,7 @@ public class BeerInventoryServiceClient implements BeerInventoryService {
     private final RestTemplate restTemplate;
 
     // NOTE: must not be final
-    @Value("${brewery.inventoryServiceHost}")
+    @Value("${brewery.inventory_service_host}")
     private String inventoryServiceHost = "http://localhost:8080";
 
     public BeerInventoryServiceClient(RestTemplateBuilder builder) {

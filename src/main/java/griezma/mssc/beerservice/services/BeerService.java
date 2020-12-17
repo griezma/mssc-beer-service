@@ -1,14 +1,16 @@
 package griezma.mssc.beerservice.services;
 
+import griezma.mssc.beerservice.api.mapper.BeerMapper;
+import griezma.mssc.beerservice.api.model.BeerDto;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.api.model.BeerDto;
-import griezma.mssc.beerservice.api.mapper.BeerMapper;
+import griezma.mssc.beerservice.services.inventory.BeerInventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -21,6 +23,9 @@ import java.util.function.Function;
 public class BeerService {
     private final BeerRepository repo;
     private final BeerMapper mapper;
+
+    private final JmsTemplate jms;
+    private final BeerInventoryService inventoryService;
 
     @Cacheable(cacheNames = "beerCache", key="#beerId", condition = "#inventory == false")
     public Optional<BeerDto> findBeerById(UUID beerId, boolean inventory) {
@@ -52,7 +57,7 @@ public class BeerService {
 
     @Cacheable(cacheNames = "beerListCache", condition = "#inventory == false")
     public Page<BeerDto> listBeers(String beerName, String beerStyle, boolean inventory, PageRequest of) {
-        log.debug("caching? listBeers was called");
+        log.debug("Computing listBeers");
         if (beerName != null) {
             return repo.findAllByBeerNameContainingIgnoreCase(beerName, of).map(beerToDto(inventory));
         } else if (beerStyle != null) {
