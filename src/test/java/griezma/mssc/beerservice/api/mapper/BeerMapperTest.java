@@ -2,7 +2,7 @@ package griezma.mssc.beerservice.api.mapper;
 
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.services.inventory.BeerInventoryService;
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

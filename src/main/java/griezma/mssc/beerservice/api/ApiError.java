@@ -1,4 +1,4 @@
-package griezma.mssc.beerservice.api.model;
+package griezma.mssc.beerservice.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

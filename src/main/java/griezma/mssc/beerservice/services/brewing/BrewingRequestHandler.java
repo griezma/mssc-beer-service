@@ -1,11 +1,11 @@
 package griezma.mssc.beerservice.services.brewing;
 
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import griezma.mssc.beerservice.config.JmsConfig;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.events.BeerInventoryEvent;
-import griezma.mssc.beerservice.events.BrewingRequest;
+import griezma.mssc.beerorder.events.BeerInventoryEvent;
+import griezma.mssc.beerorder.events.BrewingRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

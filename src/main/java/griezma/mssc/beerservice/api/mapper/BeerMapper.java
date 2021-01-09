@@ -1,7 +1,7 @@
 package griezma.mssc.beerservice.api.mapper;
 
 import griezma.mssc.beerservice.data.Beer;
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

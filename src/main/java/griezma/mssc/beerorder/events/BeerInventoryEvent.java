@@ -1,6 +1,6 @@
-package griezma.mssc.beerservice.events;
+package griezma.mssc.beerorder.events;
 
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import lombok.Builder;
 import lombok.Getter;
 

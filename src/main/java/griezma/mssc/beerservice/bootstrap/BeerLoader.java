@@ -2,20 +2,13 @@ package griezma.mssc.beerservice.bootstrap;
 
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.api.model.BeerStyle;
+import griezma.mssc.brewery.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.math.BigDecimal;
-import java.nio.file.Files;
 import java.util.Arrays;
 
 @Slf4j

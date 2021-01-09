@@ -4,7 +4,7 @@ import griezma.mssc.beerservice.api.mapper.BeerMapper;
 import griezma.mssc.beerservice.config.JmsConfig;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.events.BrewingRequest;
+import griezma.mssc.beerorder.events.BrewingRequest;
 import griezma.mssc.beerservice.services.inventory.BeerInventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

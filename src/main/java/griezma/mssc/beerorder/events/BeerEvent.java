@@ -1,11 +1,10 @@
-package griezma.mssc.beerservice.events;
+package griezma.mssc.beerorder.events;
 
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.UUID;
 
 @Getter
 @NoArgsConstructor

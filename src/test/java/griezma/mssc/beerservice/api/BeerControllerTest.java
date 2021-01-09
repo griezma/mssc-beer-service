@@ -1,11 +1,10 @@
 package griezma.mssc.beerservice.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import griezma.mssc.beerservice.api.model.BeerDto;
-import griezma.mssc.beerservice.api.model.BeerStyle;
+import griezma.mssc.brewery.model.BeerDto;
+import griezma.mssc.brewery.model.BeerStyle;
 import griezma.mssc.beerservice.services.BeerService;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockedConstruction;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

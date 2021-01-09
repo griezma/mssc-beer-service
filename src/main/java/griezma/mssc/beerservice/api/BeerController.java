@@ -1,7 +1,7 @@
 package griezma.mssc.beerservice.api;
 
 import griezma.mssc.beerservice.services.BeerService;
-import griezma.mssc.beerservice.api.model.BeerDto;
+import griezma.mssc.brewery.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.ServletContext;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
