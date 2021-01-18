@@ -1,11 +1,11 @@
 package griezma.mssc.beerservice.services.brewing;
 
-import griezma.mssc.brewery.model.BeerDto;
 import griezma.mssc.beerservice.config.JmsConfig;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerorder.events.BeerInventoryEvent;
-import griezma.mssc.beerorder.events.BrewingRequest;
+import griezma.mssc.brewery.model.BeerDto;
+import griezma.mssc.brewery.model.events.BeerInventoryEvent;
+import griezma.mssc.brewery.model.events.BrewingRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
@@ -40,7 +40,7 @@ public class BrewingRequestHandler {
     }
 
     private void brewingFinished(BrewingRequest brewingReq) {
-        log.debug("brewingFinished: {}", brewingReq);
+//        log.debug("brewingFinished: {}", brewingReq);
         BeerDto beer = brewingReq.getBeer();
         Beer beerEntity = repo.findById(beer.getId()).orElseThrow();
         beer.setQuantityOnHand(beerEntity.getMinOnHand() + brewingReq.getQuantityToBrew());

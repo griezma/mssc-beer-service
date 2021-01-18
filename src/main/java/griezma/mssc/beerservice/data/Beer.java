@@ -1,9 +1,10 @@
 package griezma.mssc.beerservice.data;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -16,7 +17,6 @@ import java.util.UUID;
 public class Beer {
     @Id
     @GeneratedValue
-    @Column(columnDefinition = "varbinary(32)", updatable = false)
     private UUID id;
 
     @Version

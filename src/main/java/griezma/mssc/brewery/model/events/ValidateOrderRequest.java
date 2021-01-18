@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 
 @Data @AllArgsConstructor @NoArgsConstructor
 public class ValidateOrderRequest {
-    private BeerOrderDto beerOrder;
+    private BeerOrderDto order;
 }

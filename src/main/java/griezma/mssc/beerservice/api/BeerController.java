@@ -3,6 +3,7 @@ package griezma.mssc.beerservice.api;
 import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.brewery.model.BeerDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.UUID;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
@@ -43,6 +45,7 @@ public class BeerController {
 
     @GetMapping("/beerupc/{upc}")
     ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
+//        log.debug("findBeerByUpc: {}", upc);
         return beerService.findBeerByUpc(upc)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

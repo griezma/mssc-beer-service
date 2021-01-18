@@ -22,7 +22,7 @@ public class OrderValidationHandler {
 
     @JmsListener(destination = JmsConfig.VALIDATE_BEERORDER_QUEUE)
     void handleValidateOrder(ValidateOrderRequest validateRequest) {
-        BeerOrderDto beerOrder = validateRequest.getBeerOrder();
+        BeerOrderDto beerOrder = validateRequest.getOrder();
         List<BeerOrderLineDto> orderLineErrors = beerOrder.getOrderLines().stream()
                 .filter(orderLine -> repo.findByUpc(orderLine.getUpc()).isEmpty())
                 .collect(Collectors.toList());

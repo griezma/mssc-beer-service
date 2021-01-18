@@ -28,11 +28,10 @@ public class BeerInventoryServiceClient implements BeerInventoryService {
     @Override
     public Integer getOnhandInventory(UUID beerId) {
         String url = inventoryServiceHost + INVENTORY_PATH;
-        log.debug("getOnhandInventory url={}, beerId={}", url, beerId);
+        //log.debug("getOnhandInventory url={}, beerId={}", url, beerId);
         var responseEntity = restTemplate
                 .exchange(url, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerId);
-        log.debug("response: " + responseEntity);
         return responseEntity.getBody().stream()
                 .mapToInt(BeerInventoryDto::getQuantityOnHand)
                 .sum();

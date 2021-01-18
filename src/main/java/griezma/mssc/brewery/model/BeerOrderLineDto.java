@@ -28,7 +28,7 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class BeerOrderLineDto {
-    private UUID id;
+    private long id;
     private String upc;
     private UUID beerId;
     private String beerName;

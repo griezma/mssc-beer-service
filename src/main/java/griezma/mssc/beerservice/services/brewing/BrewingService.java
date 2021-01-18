@@ -4,7 +4,7 @@ import griezma.mssc.beerservice.api.mapper.BeerMapper;
 import griezma.mssc.beerservice.config.JmsConfig;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerorder.events.BrewingRequest;
+import griezma.mssc.brewery.model.events.BrewingRequest;
 import griezma.mssc.beerservice.services.inventory.BeerInventoryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class BrewingService {
 
     @Scheduled(fixedRate = 5000)
     void checkForLowInventory() {
-        log.debug("checkForLowInventory");
+//        log.debug("checkForLowInventory");
         var allBeers = repo.findAll();
         StreamSupport.stream(allBeers.spliterator(), false)
                 .filter(this::brewingRequired)
@@ -38,7 +38,7 @@ public class BrewingService {
     }
 
     private void sendBrewingRequest(Beer beer) {
-        log.debug("sendBrewingRequest {}", beer);
+//        log.debug("sendBrewingRequest {}", beer);
         BrewingRequest brewingRequest = BrewingRequest.builder()
                 .beer(dtoMapper.beerToDto(beer))
                 .quantityToBrew(beer.getQuantityToBrew())
