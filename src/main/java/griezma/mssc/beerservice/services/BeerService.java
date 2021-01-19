@@ -1,10 +1,10 @@
 package griezma.mssc.beerservice.services;
 
 import griezma.mssc.beerservice.api.mapper.BeerMapper;
-import griezma.mssc.brewery.model.BeerDto;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
-import griezma.mssc.beerservice.services.inventory.BeerInventoryService;
+import griezma.mssc.beerservice.services.inventory.InventoryService;
+import griezma.mssc.brewery.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,7 +25,8 @@ public class BeerService {
     private final BeerMapper mapper;
 
     private final JmsTemplate jms;
-    private final BeerInventoryService inventoryService;
+    private final InventoryService inventoryService;
+//    private final InventoryFeignClient inventoryService;
 
     @Cacheable(cacheNames = "beerCache", key="#beerId", condition = "#inventory == false")
     public Optional<BeerDto> findBeerById(UUID beerId, boolean inventory) {

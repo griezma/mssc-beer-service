@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class InventoryServiceClientIT {
     @Autowired
-    BeerInventoryService client;
+    InventoryService client;
 
     private final UUID existingBeerId = UUID.fromString("0a818933-087d-47f2-ad83-2f986ed087eb");
 
