@@ -1,6 +1,5 @@
-package griezma.mssc.beerservice.data;
+package griezma.mssc.beerservice.services;
 
-import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.brewery.model.BeerDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

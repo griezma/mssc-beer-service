@@ -1,7 +1,7 @@
 package griezma.mssc.beerservice.api.mapper;
 
 import griezma.mssc.beerservice.data.Beer;
-import griezma.mssc.beerservice.services.inventory.InventoryService;
+import griezma.mssc.beerservice.services.inventory.InventoryServiceClient;
 import griezma.mssc.brewery.model.BeerDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class BeerMapperTest {
     private BeerMapper mapper;
 
     @MockBean
-    private InventoryService inventoryMock;
+    private InventoryServiceClient inventoryMock;
 
     @BeforeEach
     void inventoryServiceStub() {

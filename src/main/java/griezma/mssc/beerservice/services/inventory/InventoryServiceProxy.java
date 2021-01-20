@@ -1,5 +1,6 @@
 package griezma.mssc.beerservice.services.inventory;
 
+import griezma.mssc.brewery.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -15,8 +16,7 @@ import java.util.UUID;
 @Profile("!localdiscovery")
 @Slf4j
 @Component
-public class InventoryServiceProxy implements InventoryService {
-    private static final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
+public class InventoryServiceProxy implements InventoryServiceClient {
     private final RestTemplate restTemplate;
 
     // NOTE: must not be final
@@ -28,14 +28,12 @@ public class InventoryServiceProxy implements InventoryService {
     }
 
     @Override
-    public Integer getOnhandInventory(UUID beerId) {
+    public List<BeerInventoryDto> getOnhandInventoryList(UUID beerId) {
         String url = inventoryServiceHost + INVENTORY_PATH;
-        //log.debug("getOnhandInventory url={}, beerId={}", url, beerId);
+        log.debug("getOnhandInventory url={}, beerId={}", url, beerId);
         var responseEntity = restTemplate
                 .exchange(url, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerId);
-        return responseEntity.getBody().stream()
-                .mapToInt(BeerInventoryDto::getQuantityOnHand)
-                .sum();
+        return responseEntity.getBody();
     }
 }

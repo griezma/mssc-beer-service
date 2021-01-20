@@ -5,7 +5,7 @@ import griezma.mssc.beerservice.config.JmsConfig;
 import griezma.mssc.beerservice.data.Beer;
 import griezma.mssc.beerservice.data.BeerRepository;
 import griezma.mssc.brewery.model.events.BrewingRequest;
-import griezma.mssc.beerservice.services.inventory.InventoryService;
+import griezma.mssc.beerservice.services.inventory.InventoryServiceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.core.JmsTemplate;
@@ -20,7 +20,7 @@ import java.util.stream.StreamSupport;
 public class BrewingService {
     private final JmsTemplate jms;
     private final BeerRepository repo;
-    private final InventoryService inventoryService;
+    private final InventoryServiceClient inventoryService;
     private final BeerMapper dtoMapper;
 
     @Scheduled(fixedRate = 5000)
