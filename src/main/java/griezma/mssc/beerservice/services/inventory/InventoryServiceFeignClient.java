@@ -12,9 +12,7 @@ import java.util.UUID;
 
 @Profile("localdiscovery")
 @FeignClient(name = "inventory-service")
-interface InventoryServiceFeignClient extends InventoryServiceClient {
-
-    @Override
+public interface InventoryServiceFeignClient extends InventoryServiceClient {
     @RequestMapping(method = RequestMethod.GET, value = InventoryServiceClient.INVENTORY_PATH)
     List<BeerInventoryDto> getOnhandInventoryList(@PathVariable UUID beerId);
 }

@@ -1,6 +1,8 @@
 package griezma.mssc.beerservice.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
@@ -8,6 +10,7 @@ import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.MessageType;
 
+@Slf4j
 @EnableJms
 @Configuration
 public class JmsConfig {
@@ -19,7 +22,9 @@ public class JmsConfig {
 
     @Bean
     MessageConverter jsonConverter(ObjectMapper om) {
+        log.debug("Configuring json converter");
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        om.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         converter.setObjectMapper(om);
         converter.setTargetType(MessageType.TEXT);
         converter.setTypeIdPropertyName("_JsonType");

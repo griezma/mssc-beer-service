@@ -61,6 +61,6 @@ public class BeerLoader implements CommandLineRunner {
         b2 = beerRepository.save(b2);
         b3 = beerRepository.save(b3);
 
-        log.debug("Added initial beers {}", Arrays.asList(b1, b2, b3));
+        log.info("Loaded initial beers {}", Arrays.asList(b1, b2, b3));
     }
 }

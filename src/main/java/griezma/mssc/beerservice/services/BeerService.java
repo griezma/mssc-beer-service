@@ -30,12 +30,13 @@ public class BeerService {
 
     @Cacheable(cacheNames = "beerCache", key="#beerId", condition = "#inventory == false")
     public Optional<BeerDto> findBeerById(UUID beerId, boolean inventory) {
-        log.debug("caching? findBeerById was called");
+        log.debug("Find beer by id: {}", beerId);
         return repo.findById(beerId)
                 .map(beerToDto(inventory));
     }
 
     public BeerDto saveBeer(BeerDto beerDto) {
+        log.debug("Saving beer: {}", beerDto);
         Beer saved = repo.save(mapper.dtoToBeer(beerDto));
         return mapper.beerToDto(saved);
     }

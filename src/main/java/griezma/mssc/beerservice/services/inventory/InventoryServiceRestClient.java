@@ -16,14 +16,14 @@ import java.util.UUID;
 @Profile("!localdiscovery")
 @Slf4j
 @Component
-public class InventoryServiceProxy implements InventoryServiceClient {
+public class InventoryServiceRestClient implements InventoryServiceClient {
     private final RestTemplate restTemplate;
 
     // NOTE: must not be final
     @Value("${beerworks.inventory_service_host}")
     private String inventoryServiceHost = "http://localhost:9090";
 
-    public InventoryServiceProxy(RestTemplateBuilder builder) {
+    public InventoryServiceRestClient(RestTemplateBuilder builder) {
         this.restTemplate = builder.build();
     }
 
