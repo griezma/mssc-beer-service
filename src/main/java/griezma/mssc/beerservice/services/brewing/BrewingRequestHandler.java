@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 @Slf4j
@@ -31,6 +32,8 @@ public class BrewingRequestHandler {
     }
 
     private void startBrewing(BrewingRequest brewingReq) {
+        log.debug("Start brewing: {}, quantity={}", brewingReq, brewingReq.getQuantityToBrew());
+        log.debug("Beer exists: " + repo.existsById(brewingReq.getBeer().getId()));
         Random random = new Random();
         int duration = 7 + (int)(7 * Math.random());
         scheduler.schedule(() -> {
@@ -40,9 +43,10 @@ public class BrewingRequestHandler {
     }
 
     private void brewingFinished(BrewingRequest brewingReq) {
-//        log.debug("brewingFinished: {}", brewingReq);
+        log.debug("Brewing finished: {}, quantity={}", brewingReq, brewingReq.getQuantityToBrew());
         BeerDto beer = brewingReq.getBeer();
-        Beer beerEntity = repo.findById(beer.getId()).orElseThrow();
+        log.debug("Beer exists: " + repo.existsById(beer.getId()));
+        Beer beerEntity = repo.findById(beer.getId()).orElseThrow(() -> new NoSuchElementException("Beer not found by id: " + beer.getId()));
         beer.setQuantityOnHand(beerEntity.getMinOnHand() + brewingReq.getQuantityToBrew());
         jms.convertAndSend(JmsConfig.INVENTORY_EVENT_QUEUE, BeerInventoryEvent.builder()
                 .beer(beer)

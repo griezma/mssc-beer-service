@@ -23,14 +23,18 @@ public class InventoryServiceRestClient implements InventoryServiceClient {
     @Value("${beerworks.inventory_service_host}")
     private String inventoryServiceHost = "http://localhost:9090";
 
-    public InventoryServiceRestClient(RestTemplateBuilder builder) {
-        this.restTemplate = builder.build();
+    public InventoryServiceRestClient(RestTemplateBuilder builder,
+                                      @Value("${beerworks.inventory-user}") String user,
+                                      @Value("${beerworks.inventory-password}") String password) {
+        this.restTemplate = builder
+                .basicAuthentication(user, password)
+                .build();
     }
 
     @Override
     public List<BeerInventoryDto> getOnhandInventoryList(UUID beerId) {
         String url = inventoryServiceHost + INVENTORY_PATH;
-        log.debug("getOnhandInventory url={}, beerId={}", url, beerId);
+        log.trace("getOnhandInventory: {}", beerId);
         var responseEntity = restTemplate
                 .exchange(url, HttpMethod.GET, null,
                         new ParameterizedTypeReference<List<BeerInventoryDto>>() {}, beerId);

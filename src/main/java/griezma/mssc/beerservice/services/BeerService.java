@@ -42,6 +42,7 @@ public class BeerService {
     }
 
     public void removeBeerById(UUID beerId) {
+        log.debug("Remove beer: {}", beerId);
         repo.deleteById(beerId);
     }
 

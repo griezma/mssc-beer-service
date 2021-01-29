@@ -14,12 +14,4 @@ public class BeerServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(BeerServiceApplication.class, args);
     }
-
-//    @Bean
-//    ApplicationRunner runner(Environment env) {
-//        return args -> {
-//            log.info("Using database " + env.getProperty("spring.jpa.database"));
-//            log.info("Config source is " + env.getProperty("beerworks.configsource.id"));
-//        };
-//    }
 }
