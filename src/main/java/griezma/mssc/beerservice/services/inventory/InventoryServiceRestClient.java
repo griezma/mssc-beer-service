@@ -24,8 +24,8 @@ public class InventoryServiceRestClient implements InventoryServiceClient {
     private String inventoryServiceHost = "http://localhost:9090";
 
     public InventoryServiceRestClient(RestTemplateBuilder builder,
-                                      @Value("${beerworks.inventory-user}") String user,
-                                      @Value("${beerworks.inventory-password}") String password) {
+                                      @Value("${beerworks.inventory-user:better}") String user,
+                                      @Value("${beerworks.inventory-password:beer}") String password) {
         this.restTemplate = builder
                 .basicAuthentication(user, password)
                 .build();

@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.ServletContext;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.UUID;
@@ -25,7 +24,6 @@ public class BeerController {
     private static final String API_V1 = "/api/v1/";
 
     private final BeerService beerService;
-    private final ServletContext context;
 
     @GetMapping(path = "/beer",  produces = MediaType.APPLICATION_JSON_VALUE)
     Page<BeerDto> listBeers(@RequestParam(value = "pageNumber", required = false, defaultValue = "0") Integer pageNumber,
