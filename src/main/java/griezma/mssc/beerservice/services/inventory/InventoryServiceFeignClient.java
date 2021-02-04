@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 import java.util.UUID;
 
-@Profile("localdiscovery")
+@Profile("cloudconfig")
 @FeignClient(name = "inventory-service", configuration = FeignClientConfig.class)
 public interface InventoryServiceFeignClient extends InventoryServiceClient {
     @RequestMapping(method = RequestMethod.GET, value = InventoryServiceClient.INVENTORY_PATH)

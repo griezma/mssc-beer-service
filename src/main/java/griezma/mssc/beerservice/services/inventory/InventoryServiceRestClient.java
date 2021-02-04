@@ -13,15 +13,15 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.UUID;
 
-@Profile("!localdiscovery")
+@Profile("!cloudconfig")
 @Slf4j
 @Component
 public class InventoryServiceRestClient implements InventoryServiceClient {
     private final RestTemplate restTemplate;
 
     // NOTE: must not be final
-    @Value("${beerworks.inventory_service_host}")
-    private String inventoryServiceHost = "http://localhost:9090";
+    @Value("${beerworks.inventory_service_base}")
+    private String inventoryServiceBase = "http://localhost:9090";
 
     public InventoryServiceRestClient(RestTemplateBuilder builder,
                                       @Value("${beerworks.inventory-user:better}") String user,
@@ -33,7 +33,7 @@ public class InventoryServiceRestClient implements InventoryServiceClient {
 
     @Override
     public List<BeerInventoryDto> getOnhandInventoryList(UUID beerId) {
-        String url = inventoryServiceHost + INVENTORY_PATH;
+        String url = inventoryServiceBase + INVENTORY_PATH;
         log.trace("getOnhandInventory: {}", beerId);
         var responseEntity = restTemplate
                 .exchange(url, HttpMethod.GET, null,
