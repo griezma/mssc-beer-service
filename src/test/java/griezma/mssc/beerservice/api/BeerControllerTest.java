@@ -1,16 +1,15 @@
 package griezma.mssc.beerservice.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import griezma.mssc.beerservice.services.BeerService;
 import griezma.mssc.brewery.model.BeerDto;
 import griezma.mssc.brewery.model.BeerStyle;
-import griezma.mssc.beerservice.services.BeerService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
@@ -22,7 +21,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("test")
 @WebMvcTest(BeerController.class)
 public class BeerControllerTest {
     @Autowired

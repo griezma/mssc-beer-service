@@ -20,8 +20,8 @@ public class InventoryServiceRestClient implements InventoryServiceClient {
     private final RestTemplate restTemplate;
 
     // NOTE: must not be final
-    @Value("${beerworks.inventory_service_base}")
-    private String inventoryServiceBase = "http://localhost:9090";
+    @Value("${beerworks.inventory_service_base:http://localhost:9090}")
+    private String inventoryServiceBase;
 
     public InventoryServiceRestClient(RestTemplateBuilder builder,
                                       @Value("${beerworks.inventory-user:better}") String user,
